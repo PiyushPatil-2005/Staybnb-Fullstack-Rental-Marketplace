@@ -4,7 +4,7 @@ Staybnb is a full-featured, Airbnb-inspired rental web application that allows u
 
 ## 🚀 Live Demo
 🌐 [Deployed on Render](https://staybnb-home-rental.onrender.com/listings)
-link : https://staybnb-home-rental.onrender.com/listings
+- link : https://staybnb-home-rental.onrender.com/listings
 
 ---
 
@@ -13,7 +13,7 @@ link : https://staybnb-home-rental.onrender.com/listings
 ### 🖥️ Frontend
 - **EJS** (Embedded JavaScript templating)
 - **Bootstrap 5** for responsive styling
-- **Vanilla JavaScript** for client-side interactivity
+- **JavaScript** for client-side interactivity
 
 ### ⚙️ Backend
 - **Node.js** + **Express.js** for server-side logic
