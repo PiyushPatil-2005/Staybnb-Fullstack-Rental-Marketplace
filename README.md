@@ -65,8 +65,8 @@ Staybnb is a full-featured, Airbnb-inspired rental web application that allows u
 
 Create a `.env` file in the root with:
 
-ATLASDB_URL=<your MongoDB connection string>
-CLOUDINARY_CLOUD_NAME=<your Cloudinary name>
-CLOUDINARY_KEY=<your Cloudinary key>
-CLOUDINARY_SECRET=<your Cloudinary secret>
-SECRET=<your session secret>
+- ATLASDB_URL=<your MongoDB connection string>
+- CLOUDINARY_CLOUD_NAME=<your Cloudinary name>
+- CLOUDINARY_KEY=<your Cloudinary key>
+- CLOUDINARY_SECRET=<your Cloudinary secret>
+- SECRET=<your session secret>
