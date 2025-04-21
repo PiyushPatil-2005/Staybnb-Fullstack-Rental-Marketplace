@@ -1,0 +1,105 @@
+<%- layout('/layouts/boilerplate.ejs') %>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2 mt-4">
+            <h2 class="mb-3">Edit Form</h2>
+            <form method="POST" action="/listings/<%=data._id%>?_method=PUT" novalidate class="needs-validation" id="editForm" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input name="listing[title]" type="text" class="form-control" value="<%=data.title%>" required>
+                    <div class="invalid-feedback">
+                        Please provide a title.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" class="form-control" required><%=data.description%></textarea>
+                    <div class="invalid-feedback">
+                        Please provide a description.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload New Image</label>
+                    <input name="listing[image]" type="file" class="form-control">
+                    <div class="invalid-feedback">
+                        Please provide an image.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input name="listing[price]" type="text" class="form-control" value="<%=data.price%>" required pattern="[0-9]+(\.[0-9]+)?" oninput="validatePrice(this)">
+                        <div class="invalid-feedback">
+                            Please provide a valid price (numbers only).
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="country">Country</label>
+                        <input name="listing[country]" type="text" class="form-control" value="<%=data.country%>" required>
+                        <div class="invalid-feedback">
+                            Please provide a country.
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <label for="location" class="form-label">Location</label>
+                    <input name="listing[location]" type="text" class="form-control" value="<%= data.location%>" placeholder="Mumbai, Maharashtra" required>
+                    <div class="valid-feedback">Best Location</div>
+                    <div class="invalid-feedback">Enter Valid Country Name</div>
+                </div>
+                <button type="submit" class="mb-4 edit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    function validatePrice(input) {
+        // Remove any non-numeric characters except decimal point
+        input.value = input.value.replace(/[^0-9.]/g, '');
+        
+        // Ensure only one decimal point
+        let parts = input.value.split('.');
+        if (parts.length > 2) {
+            input.value = parts[0] + '.' + parts.slice(1).join('');
+        }
+        
+        // Validate the input
+        const isValid = /^[0-9]+(\.[0-9]+)?$/.test(input.value);
+        input.setCustomValidity(isValid ? '' : 'Please enter a valid number');
+    }
+
+    // Form validation
+    (() => {
+        'use strict'
+        const form = document.getElementById('editForm');
+        
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    })();
+</script>
+<script>
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    const dropdownButton = document.getElementById('categoryDropdown');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateDropdownText);
+    });
+
+    function updateDropdownText() {
+        const selectedCategories = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selectedCategories.length > 0) {
+            dropdownButton.textContent = selectedCategories.join(', ');
+        } else {
+            dropdownButton.textContent = 'Select Property Type';
+        }
+    }
+</script>

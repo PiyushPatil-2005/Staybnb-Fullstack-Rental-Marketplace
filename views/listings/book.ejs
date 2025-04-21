@@ -1,0 +1,16 @@
+<%- layout('/layouts/boilerplate.ejs') %>
+<div class="card-body text-center">
+    <h5 class="card-title text-danger">We're Sorry — Booking Unavailable Right Now</h5>
+    <p class="card-text">This listing is currently not accepting bookings. Please check back later or explore other amazing places to stay!</p>
+    <a href="/listings" class="btn btn-success" style="width: 15rem;">Browse Other Listings</a>
+</div>
+<style>
+    .card-body {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        font-size: 1.2rem;
+    }
+</style>

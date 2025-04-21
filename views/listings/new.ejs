@@ -1,0 +1,156 @@
+<% layout("layouts/boilerplate.ejs") %>
+<div class="row">
+    <div class="col-8 offset-2">
+        <br>
+        <h2 class="mb-4">Create New Listing</h2>
+        <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input name="listing[title]" type="text" placeholder="Add a Title" class="form-control" required>
+                <div class="invalid-feedback">Please Enter Title</div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="listing[description]" class="form-control" required></textarea>
+                <div class="invalid-feedback">Enter short Description</div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Listing Image</label>
+                <input name="listing[image]" type="file" class="form-control" required>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="price" class="form-label">Price</label>
+                    <input name="listing[price]" type="number" placeholder="1500" class="form-control" required>
+                    <div class="invalid-feedback">Enter Price</div>
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label for="country" class="form-label">Country</label>
+                    <input name="listing[country]" type="text" class="form-control" placeholder="India" required>
+                    <div class="valid-feedback">Great</div>
+                    <div class="invalid-feedback">Enter Country Name</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="location" class="form-label">Location</label>
+                    <input name="listing[location]" type="text" class="form-control" placeholder="Mumbai, Maharashtra" required>
+                    <div class="valid-feedback">Best Location</div>
+                    <div class="invalid-feedback">Enter Valid Country Name</div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <div class="dropdown">
+                        <label for="category" class="form-label">Select categories<span class="text-danger">*</span></label><br>
+                        <button class="btn dropdown-toggle w-100 text-start" style="border: 1px solid rgba(0, 0, 0, 0.5);" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="categoryDropdown">
+                          Select Categories
+                        </button>
+                        <div class="invalid-feedback">Please select at least one category</div>
+                        <ul class="dropdown-menu p-3" style="width: 100%; max-height: 250px; overflow-y: auto;">
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Beach" id="beach">
+                              <label class="form-check-label" for="beach">Beach</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Mountains" id="mountains">
+                              <label class="form-check-label" for="mountains">Mountains</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Cabins" id="cabins">
+                              <label class="form-check-label" for="cabins">Cabins</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="LakeFront" id="lakefront">
+                              <label class="form-check-label" for="lakefront">LakeFront</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Tiny Homes" id="tiny-homes">
+                              <label class="form-check-label" for="tiny-homes">Tiny Homes</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Farm House" id="farmhouse">
+                              <label class="form-check-label" for="farmhouse">Farm House</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Luxury" id="luxury">
+                              <label class="form-check-label" for="luxury">Luxury</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Camping" id="camping">
+                              <label class="form-check-label" for="camping">Camping</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Treehouse" id="treehouse">
+                              <label class="form-check-label" for="treehouse">Treehouse</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="Pet-Friendly" id="pet-friendly">
+                              <label class="form-check-label" for="pet-friendly">Pet-Friendly</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="listing[category][]" value="City" id="city">
+                              <label class="form-check-label" for="city">City</label>
+                            </div>
+                          </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-dark add-btn">Add</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    const dropdownButton = document.getElementById('categoryDropdown');
+    const form = document.querySelector('form');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateDropdownText);
+    });
+
+    form.addEventListener('submit', function(event) {
+        const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
+        if (!isAnyChecked) {
+            event.preventDefault();
+            event.stopPropagation();
+            dropdownButton.style.borderColor = '#dc3545';
+            dropdownButton.nextElementSibling.style.display = 'block';
+        }
+    });
+
+    function updateDropdownText() {
+        const selectedCategories = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selectedCategories.length > 0) {
+            dropdownButton.textContent = selectedCategories.join(', ');
+            dropdownButton.style.borderColor = 'rgba(0, 0, 0, 0.5)';
+            dropdownButton.nextElementSibling.style.display = 'none';
+        } else {
+            dropdownButton.textContent = 'Select Categories';
+        }
+    }
+</script>
